@@ -91,6 +91,23 @@
   padding-top: 1rem;
 }
 
+.added-to-cart {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.success-message {
+  color: #28a745;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  padding: 10px;
+  background: #d4edda;
+  border-radius: 4px;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .item-detail {
     padding: 1rem;

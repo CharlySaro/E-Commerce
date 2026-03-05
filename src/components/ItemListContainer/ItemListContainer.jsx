@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getProducts, getProductsByCategory } from '../../data/products';
+import { getProducts, getProductsByCategory } from '../../services/firebase';
 import ItemList from '../ItemList/ItemList';
 import './ItemListContainer.css';
 
@@ -12,20 +12,21 @@ const ItemListContainer = ({ greeting }) => {
   useEffect(() => {
     setLoading(true);
 
-    const fetchProducts = categoryId 
-      ? getProductsByCategory(categoryId)
-      : getProducts();
-
-    fetchProducts
-      .then(response => {
+    const fetchProducts = async () => {
+      try {
+        const response = categoryId 
+          ? await getProductsByCategory(categoryId)
+          : await getProducts();
         setProducts(response);
-      })
-      .catch(err => {
+      } catch (err) {
         console.error('Error al cargar productos:', err);
-      })
-      .finally(() => {
+        setProducts([]);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchProducts();
   }, [categoryId]);
 
   if (loading) {

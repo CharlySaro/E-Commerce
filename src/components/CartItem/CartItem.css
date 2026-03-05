@@ -1,0 +1,36 @@
+.cart-item {
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.2s ease;
+}
+
+.cart-item:hover {
+  background-color: #f8f9fa;
+}
+
+.cart-item-image {
+  width: 80px;
+  text-align: center;
+}
+
+.cart-item-image img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.cart-item-name {
+  font-weight: 500;
+  max-width: 200px;
+}
+
+.cart-item-price,
+.cart-item-quantity,
+.cart-item-subtotal {
+  text-align: right;
+  font-weight: 500;
+}
+
+.cart-item-remove {
+  text-align: center;
+}

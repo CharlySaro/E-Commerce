@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getProductById } from '../../data/products';
+import { getProductById } from '../../services/firebase';
 import ItemDetail from '../ItemDetail/ItemDetail';
 import './ItemDetailContainer.css';
 
@@ -14,21 +14,23 @@ const ItemDetailContainer = () => {
     setLoading(true);
     setError(false);
 
-    getProductById(id)
-      .then(response => {
+    const fetchProduct = async () => {
+      try {
+        const response = await getProductById(id);
         if (response) {
           setProduct(response);
         } else {
           setError(true);
         }
-      })
-      .catch(err => {
+      } catch (err) {
         console.error('Error al cargar el producto:', err);
         setError(true);
-      })
-      .finally(() => {
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchProduct();
   }, [id]);
 
   if (loading) {
